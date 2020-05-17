@@ -1,0 +1,51 @@
+name: cf-bs
+base: core18
+version: '271.0.0'
+summary: Cloud Foundry BOSH
+description: |
+  Cloud Foundry BOSH is an open source tool chain for release engineering, deployment and lifecycle management of large scale distributed services. https://bosh.io
+
+grade: stable # devel/stable
+confinement: strict # devmode/strict
+
+parts:
+  cf-bs:
+    source: src
+    plugin: ruby
+    gems:
+      - rake
+      - bundler
+      - bosh-core
+      - bosh-director
+      - bosh-director-core
+      - bosh-monitor
+      - bosh-registry
+      - bosh-template
+      - bosh_common
+      - json
+      - talentbox-delayed_job_sequel
+      - ruby-prof
+      - mysql2
+      - pg
+    build-packages:
+      - gcc
+      - libmariadb-dev
+      - libmysqlclient-dev
+      - libpq-dev
+    stage-packages:
+      - libasn1-8-heimdal
+      - libgssapi3-heimdal
+      - libhcrypto4-heimdal
+      - libheimbase1-heimdal
+      - libheimntlm0-heimdal
+      - libhx509-5-heimdal
+      - libkrb5-26-heimdal
+      - libldap-2.4-2
+      - libmysqlclient20
+      - libpq5
+      - libroken18-heimdal
+      - libsasl2-2
+      - libwind0-heimdal
+apps:
+  cf-bs:
+    command: bin/bosh
